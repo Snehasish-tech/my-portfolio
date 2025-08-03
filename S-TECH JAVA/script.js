@@ -362,12 +362,12 @@
             const resumeContent = `SNEHASISH DEY
 Aspiring IT Professional | Tech Learner | Web Developer
 
-📞 CONTACT INFORMATION:
+---------- CONTACT INFORMATION:-----------
 Phone: +91 7908242467
 Email: snehasishdey02@gmail.com
 Location: Kolkata, West Bengal, India
 
-🎓 EDUCATION:
+--------- EDUCATION:---------
 Bachelor of Technology - Information Technology
 Narula Institute of Technology (2024-2028)
 Current CGPA: 8.41 (1st Year) | Currently in 2nd Year
@@ -378,28 +378,29 @@ Digha Vidyabhawan | Percentage: 80.2% | Year: 2024
 Secondary Education (Class 10)  
 Digha Vidyabhawan | Percentage: 90.85% | Year: 2022
 
-💻 TECHNICAL SKILLS:
+---------TECHNICAL SKILLS:---------
 Programming Languages: Java, C, JavaScript
 Web Technologies: HTML5, CSS3, JavaScript
 Tools & Technologies: Git, GitHub, VS Code
-Concepts: Data Structures, Algorithms, OOPs , Responsive Design
+Concepts: Data Structures, Algorithms, Opps , Responsive Design
 
-🏅 CERTIFICATIONS:
+---------CERTIFICATIONS:---------
 • Java Programming Fundamentals - Crio.Do (June 2025)
 • GitHub Basics & Version Control - SimpliLearn (June 2025)  
 • AI Tools Workshop - Be10X (July 2025)
 * Deloitte Australia - Data Analytics Job Simulation - Forage ( July 2025)
 
 
-📝 PROJECTS:
+---------PROJECTS:---------
 • Personal Portfolio Website (HTML, CSS, JavaScript)
 • Java Programming Practice Projects (Data Structures & Algorithms)
 • Web Development Learning Projects (Responsive Design)
+. Marku - smart gpa calculator (javascript, HTML, CSS)
 
-🎯 CAREER OBJECTIVE:
+---------CAREER OBJECTIVE:---------
 I'm currently pursuing B.Tech in Information Technology with a strong passion for web development and programming. I aim to become a skilled software engineer who can contribute meaningfully to innovative technology solutions while continuously learning and adapting to new technologies.
 
-📊 ACHIEVEMENTS:
+---------ACHIEVEMENTS:---------
 • Maintaining 8.41 CGPA in B.Tech IT program
 • Completed multiple industry-relevant certifications
 • Active learner with hands-on project experience
