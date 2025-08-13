@@ -340,6 +340,39 @@ Looking forward to growing as a developer and contributing to exciting projects 
 
     <!-- Back to Top Button -->
     <button class="back-to-top" id="backToTop" onclick="scrollToTop()">↑</button>
+    <div class="ai-assistant">
+        <button class="ai-chat-trigger" id="aiChatTrigger" title="Chat with AI Assistant">
+            🤖
+        </button>
+        
+        <div class="ai-chat-widget" id="aiChatWidget">
+            <div class="ai-chat-header">
+                <div class="ai-avatar">🤖</div>
+                <div class="ai-info">
+                    <h3>Nexa.ai</h3>
+                    <p>Ask me about Snehasish!</p>
+                </div>
+            </div>
+            
+            <div class="ai-chat-messages" id="aiChatMessages">
+                <div class="ai-message">
+                    👋 Hi! I'm Nexa.ai, Snehasish's intelligent assistant. I can help you learn more about his projects, skills, education, and experience. What would you like to know?
+                </div>
+            </div>
+            
+            <div class="ai-suggestions">
+                <span class="ai-suggestion" data-question="Tell me about Snehasish's projects">Projects</span>
+                <span class="ai-suggestion" data-question="What are his skills?">Skills</span>
+                <span class="ai-suggestion" data-question="Tell me about his education">Education</span>
+                <span class="ai-suggestion" data-question="How can I contact him?">Contact</span>
+            </div>
+            
+            <div class="ai-chat-input">
+                <input type="text" class="ai-input-field" id="aiInputField" placeholder="Ask me anything about Snehasish...">
+                <button class="ai-send-btn" id="aiSendBtn">➤</button>
+            </div>
+        </div>
+    </div>
 
 </body>
 </html> 

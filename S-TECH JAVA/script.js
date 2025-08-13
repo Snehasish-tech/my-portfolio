@@ -712,6 +712,228 @@ Generated on: ${new Date().toLocaleDateString()}`;
                 }
             }
         });
+         // AI Assistant Functionality
+
+        class AIAssistant {
+            constructor() {
+                this.isOpen = false;
+                this.chatTrigger = document.getElementById('aiChatTrigger');
+                this.chatWidget = document.getElementById('aiChatWidget');
+                this.chatMessages = document.getElementById('aiChatMessages');
+                this.inputField = document.getElementById('aiInputField');
+                this.sendBtn = document.getElementById('aiSendBtn');
+                
+                this.knowledgeBase = {
+                    projects: {
+                        keywords: ['project', 'portfolio', 'work', 'build', 'created', 'marku', 'calculator', 'bondhu'],
+                        response: "Snehasish has created several impressive projects:\n\n🌐 **Personal Portfolio Website** - A modern, responsive portfolio built with HTML5, CSS3, and JavaScript featuring smooth animations and mobile-first design.\n\n📊 **Marku: SGPA & CGPA Calculator** - A simple web app for students to calculate academic scores using credit-based inputs, built with vanilla web technologies.\n\n🎓 **ChhatroBondhu** - An ultimate study companion with notes search, GPT-based GPA calculator, and 3D visual enhancements.\n\nAll projects showcase his skills in responsive design and user-friendly interfaces!"
+                    },
+                    skills: {
+                        keywords: ['skill', 'technology', 'programming', 'language', 'tech', 'know'],
+                        response: "Snehasish has a solid foundation in multiple technologies:\n\n💻 **Programming Languages:** Java, C, JavaScript\n🌐 **Web Technologies:** HTML5, CSS3, JavaScript\n🛠️ **Tools:** Git, GitHub, VS Code\n📚 **Concepts:** Data Structures, Algorithms, OOPs, Responsive Design\n🤖 **AI Tools:** Certified in AI tools usage\n\nHe's constantly learning and expanding his skillset with a focus on full-stack web development!"
+                    },
+                    education: {
+                        keywords: ['education', 'study', 'college', 'university', 'degree', 'cgpa', 'school'],
+                        response: "📚 **Current Education:**\n🎓 Bachelor of Technology - Information Technology\n🏫 Narula Institute of Technology (2024-2028)\n📊 Current CGPA: 8.41 (1st Year)\n📅 Currently in 2nd Year\n\n**Previous Education:**\n🏆 Higher Secondary (Class 12): 80.2% from Digha Vidyabhawan (2024)\n🥇 Secondary (Class 10): 90.85% from Digha Vidyabhawan (2022)\n\nExcellent academic performance with consistent high grades!"
+                    },
+                    contact: {
+                        keywords: ['contact', 'reach', 'email', 'phone', 'connect', 'hire'],
+                        response: "📞 **Get in touch with Snehasish:**\n\n📱 Phone: +91 7908242467\n✉️ Email: snehasishdey02@gmail.com\n📍 Location: Kolkata, West Bengal, India\n🎓 Institution: Narula Institute of Technology\n\n🔗 **Social Links:**\n💼 LinkedIn: Available in portfolio\n💻 GitHub: Check out his repositories\n\nFeel free to reach out for collaboration opportunities!"
+                    },
+                    experience: {
+                        keywords: ['experience', 'work', 'job', 'internship', 'career'],
+                        response: "💼 **Snehasish's Experience:**\n\n🚀 **Student Developer** (2024 - Present)\n• Actively learning web development, DSA\n• Working on personal projects\n• Building practical programming experience\n\n📜 **Certifications** (2025 - Present)\n• Java Programming Fundamentals - Crio.Do\n• GitHub Basics & Version Control - SimpliLearn\n• AI Tools Workshop - Be10X\n• Data Analytics Job Simulation - Deloitte Australia/Forage\n\nFocused on continuous learning and skill development!"
+                    },
+                    about: {
+                        keywords: ['about', 'who', 'snehasish', 'tell me', 'info', 'background'],
+                        response: "👋 **About Snehasish Dey:**\n\nHe's a passionate Full Stack Web Developer and Computer Science undergraduate pursuing B.Tech in Information Technology. With an impressive 8.41 CGPA, he specializes in building responsive, user-friendly web applications.\n\n🎯 **Key Highlights:**\n• 2+ years of learning experience\n• Strong foundation in web technologies\n• Multiple certified courses completed\n• Active project builder\n• Based in Kolkata, West Bengal\n\nHe believes in writing clean, maintainable code and is always eager to learn new technologies!"
+                    }
+                };
+                
+                this.initializeEventListeners();
+                this.addWelcomeMessage();
+            }
+            
+            initializeEventListeners() {
+                this.chatTrigger.addEventListener('click', () => this.toggleChat());
+                this.sendBtn.addEventListener('click', () => this.sendMessage());
+                this.inputField.addEventListener('keypress', (e) => {
+                    if (e.key === 'Enter') this.sendMessage();
+                });
+                
+                // Suggestion clicks
+                document.querySelectorAll('.ai-suggestion').forEach(suggestion => {
+                    suggestion.addEventListener('click', () => {
+                        const question = suggestion.getAttribute('data-question');
+                        this.inputField.value = question;
+                        this.sendMessage();
+                    });
+                });
+                
+                // Close chat when clicking outside
+                document.addEventListener('click', (e) => {
+                    if (!this.chatTrigger.contains(e.target) && !this.chatWidget.contains(e.target)) {
+                        if (this.isOpen) {
+                            this.closeChat();
+                        }
+                    }
+                });
+            }
+            
+            toggleChat() {
+                if (this.isOpen) {
+                    this.closeChat();
+                } else {
+                    this.openChat();
+                }
+            }
+            
+            openChat() {
+                this.isOpen = true;
+                this.chatWidget.classList.add('active');
+                this.inputField.focus();
+            }
+            
+            closeChat() {
+                this.isOpen = false;
+                this.chatWidget.classList.remove('active');
+            }
+            
+            addWelcomeMessage() {
+                // Welcome message already added in HTML
+            }
+            
+            sendMessage() {
+                const message = this.inputField.value.trim();
+                if (!message) return;
+                
+                this.addUserMessage(message);
+                this.inputField.value = '';
+                
+                setTimeout(() => {
+                    this.showTypingIndicator();
+                    setTimeout(() => {
+                        this.hideTypingIndicator();
+                        const response = this.generateResponse(message);
+                        this.addAIMessage(response);
+                    }, 1500);
+                }, 300);
+            }
+            
+            addUserMessage(message) {
+                const messageDiv = document.createElement('div');
+                messageDiv.className = 'user-message';
+                messageDiv.textContent = message;
+                this.chatMessages.appendChild(messageDiv);
+                this.scrollToBottom();
+            }
+            
+            addAIMessage(message) {
+                const messageDiv = document.createElement('div');
+                messageDiv.className = 'ai-message';
+                
+                // Format message with line breaks and bold text
+                const formattedMessage = message
+                    .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+                    .replace(/\n/g, '<br>');
+                
+                messageDiv.innerHTML = formattedMessage;
+                this.chatMessages.appendChild(messageDiv);
+                this.scrollToBottom();
+            }
+            
+            showTypingIndicator() {
+                const typingDiv = document.createElement('div');
+                typingDiv.className = 'typing-indicator';
+                typingDiv.id = 'typingIndicator';
+                typingDiv.innerHTML = `
+                    <div class="typing-dot"></div>
+                    <div class="typing-dot"></div>
+                    <div class="typing-dot"></div>
+                `;
+                this.chatMessages.appendChild(typingDiv);
+                this.scrollToBottom();
+            }
+            
+            hideTypingIndicator() {
+                const typingIndicator = document.getElementById('typingIndicator');
+                if (typingIndicator) {
+                    typingIndicator.remove();
+                }
+            }
+            
+            generateResponse(message) {
+                const lowerMessage = message.toLowerCase();
+                
+                // Check for greetings
+                if (this.containsKeywords(lowerMessage, ['hello', 'hi', 'hey', 'greetings'])) {
+                    return "Hello! 👋 I'm excited to tell you about Snehasish! You can ask me about his projects, skills, education, or anything else you'd like to know.";
+                }
+                
+                // Check for thanks
+                if (this.containsKeywords(lowerMessage, ['thank', 'thanks', 'appreciate'])) {
+                    return "You're very welcome! 😊 Feel free to ask me anything else about Snehasish or reach out to him directly for opportunities!";
+                }
+                
+                // Find matching knowledge base entry
+                for (const [category, data] of Object.entries(this.knowledgeBase)) {
+                    if (this.containsKeywords(lowerMessage, data.keywords)) {
+                        return data.response;
+                    }
+                }
+                
+                // Default response for unmatched queries
+                return `I'd love to help you learn more about Snehasish! 🤖 You can ask me about:\n\n• His projects and work\n• Technical skills and expertise\n• Educational background\n• Contact information\n• Professional experience\n\nWhat specifically interests you?`;
+            }
+            
+            containsKeywords(message, keywords) {
+                return keywords.some(keyword => message.includes(keyword));
+            }
+            
+            scrollToBottom() {
+                this.chatMessages.scrollTop = this.chatMessages.scrollHeight;
+            }
+        }
+        
+        // Initialize AI Assistant when DOM is loaded
+        document.addEventListener('DOMContentLoaded', () => {
+            new AIAssistant();
+        });
+        
+        // Add notification for users
+        function showAINotification() {
+            setTimeout(() => {
+                const notification = document.createElement('div');
+                notification.style.cssText = `
+                    position: fixed;
+                    bottom: 170px;
+                    right: 100px;
+                    background: linear-gradient(45deg, #4facfe, #00f2fe);
+                    color: white;
+                    padding: 0.8rem 1rem;
+                    border-radius: 25px;
+                    font-size: 0.9rem;
+                    font-weight: 600;
+                    z-index: 9999;
+                    animation: slideIn 0.5s ease, fadeOut 0.5s ease 4s forwards;
+                    box-shadow: 0 10px 25px rgba(79, 172, 254, 0.3);
+                    max-width: 200px;
+                    text-align: center;
+                `;
+                notification.innerHTML = '💬 Try asking me about Snehasish!';
+                
+                document.body.appendChild(notification);
+                
+                setTimeout(() => {
+                    if (notification.parentNode) {
+                        notification.remove();
+                    }
+                }, 5000);
+            }, 3000);
+        }
+        
+        // Show AI notification after page loads
+        window.addEventListener('load', showAINotification);
 
         // Final initialization message
         console.log('🚀 Portfolio initialized successfully!');
